@@ -13,5 +13,23 @@ const createTask = (taskValue: string, taskColumn: COLUMN_NAME) => {
     return tasks.insertOne({"value": taskValue, "column": taskColumn})
 }
 
+const updateTask = (task: Task) => {
+    try {
+        if (!!tasks.findOne({"id": task.id})){
+            tasks.updateOne(
+                (el) => el.id=== task.id,
+                {column: task.column, value: task.value},
+            )
+        }
+        else {
+            console.log("task doesn't exists can't move", task)
+        }
+    }
+    catch (e) {
+        console.log("error in updateTask", task)
+    }
+}
 
-export {createTask, getTasks}
+
+
+export {createTask, getTasks, updateTask}
