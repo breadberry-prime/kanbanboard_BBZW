@@ -1,5 +1,5 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
-import {createTask, getTasks, updateTask} from "./services/Board.service.ts";
+import {createTask, deleteTask, getTasks, updateTask} from "./services/Board.service.ts";
 
 const router: Router = new Router()
 
@@ -31,6 +31,25 @@ router
         }
         catch (e){
             console.log(e)
+        }
+    })
+    .put("/api/deleteTask", async (ctx) => {
+        try {
+            const result = ctx.request.body();
+            if (result.type === "json") {
+                const task = await result.value;
+
+                deleteTask(task)
+
+                ctx.response.body = "deleted task successfully";
+                ctx.response.status = 200
+            } else {
+                new Error("wrong body type")
+            }
+        } catch (e) {
+            console.log("error", e)
+            ctx.response.body = e
+            ctx.response.status = 400
         }
     })
     .patch("/api/updateTask", async (ctx) => {

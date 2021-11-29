@@ -13,6 +13,11 @@ const createTask = (taskValue: string, taskColumn: COLUMN_NAME) => {
     return tasks.insertOne({"value": taskValue, "column": taskColumn})
 }
 
+const deleteTask = (task: Task) => {
+    console.log("delete task")
+    tasks.deleteOne({"id": task.id}).then(console.log)
+}
+
 const updateTask = (task: Task) => {
     try {
         if (!!tasks.findOne({"id": task.id})){
@@ -32,4 +37,4 @@ const updateTask = (task: Task) => {
 
 
 
-export {createTask, getTasks, updateTask}
+export {createTask, getTasks, updateTask, deleteTask}
