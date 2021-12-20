@@ -1,0 +1,57 @@
+<mat-card class="example-card">
+  <div *ngIf="viewState === viewStates.CREATE">
+    <mat-card-title>Task Opperation | {{"create"}}</mat-card-title>
+    <mat-card-subtitle>Task value</mat-card-subtitle>
+    <form [formGroup]="createTaskForm">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Task</mat-label>
+        <input matInput
+               placeholder="Ex. finish my school work..."
+               formControlName="taskValue"
+               required
+        >
+      </mat-form-field>
+      <mat-card-subtitle>Column</mat-card-subtitle>
+      <mat-radio-group aria-label="Select an option"
+                       formControlName="taskColumn"
+                       value="column"
+                       required
+      >
+        <mat-radio-button class="radio-button" value="1">Backlog</mat-radio-button>
+        <mat-radio-button class="radio-button" value="2">In Progress</mat-radio-button>
+        <mat-radio-button class="radio-button" value="3">Done</mat-radio-button>
+      </mat-radio-group>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" (click)="createTask()">Create Task</button>
+      </mat-card-actions>
+    </form>
+  </div>
+  <div *ngIf="viewState === viewStates.ALTERNATE">
+    <mat-card-title>Task Opperation | Alternate</mat-card-title>
+    <mat-card-subtitle>Task value</mat-card-subtitle>
+    <form [formGroup]="alterTaskForm">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Task</mat-label>
+        <input
+          matInput
+          formControlName="taskValue"
+          required
+          [value]="activeTask.value"
+        >
+      </mat-form-field>
+      <mat-card-subtitle>Column</mat-card-subtitle>
+      <mat-radio-group aria-label="Select an option"
+                       formControlName="taskColumn"
+                       required
+      >
+        <mat-radio-button class="radio-button" [checked]="activeTask.column === 0" value="1">Backlog</mat-radio-button>
+        <mat-radio-button class="radio-button" [checked]="activeTask.column === 1" value="2">In Progress</mat-radio-button>
+        <mat-radio-button class="radio-button" [checked]="activeTask.column === 2" value="3">Done</mat-radio-button>
+      </mat-radio-group>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" type="button" (click)="update()">Update</button>
+        <button mat-stroked-button color="warn" type="button" (click)="delete()">Delete</button>
+      </mat-card-actions>
+    </form>
+  </div>
+</mat-card>
