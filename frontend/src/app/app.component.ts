@@ -15,7 +15,7 @@ import {COLUMN_NAME, Task} from "./interfaces/Boards.interface";
 })
 export class AppComponent {
   title = 'frontend-kanban';
-  name = 'Angular Material Kanban board';
+  name = 'BBZW Sursee M133 Kanbanboard';
 
   BacklogColumn = new Column('Backlog', '0', [])
   InProgressColumn = new Column('In Progress', '1', [])

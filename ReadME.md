@@ -4,7 +4,7 @@
 #### Start backend
 
 Make sure you are in the right directory `backend` then:
-Run `deno run --allow-net app.ts` to run the backend server.
+Run `deno run --allow-net --allow-read --allow-write app.ts` to run the backend server.
 
 #### Start frontend
 
