@@ -39,6 +39,10 @@ export class AppComponent {
     this.updateTask(event.item.data, event.container.id)
 
     if (event.previousContainer === event.container) {
+      console.log("container data", JSON.stringify(event.container.data))
+      console.log("previous index", event.previousIndex)
+      console.log("current index", event.currentIndex)
+      console.log("data", event.item.data)
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
@@ -50,13 +54,13 @@ export class AppComponent {
   }
 
   private updateTask(task: Task, newIndex: string) {
-    if (task.value && task.column){
+    if (task.value && newIndex){
       task.column = parseInt(newIndex)
       this.backendService.updateTask(task).subscribe(r => {
         this.loadValues()
       })
     } else {
-      console.log("invalid data entry", task)
+      console.log("invalid data entry", task, newIndex)
     }
   }
 

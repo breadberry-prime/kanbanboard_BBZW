@@ -1,33 +1,30 @@
 <div id="center-div">
   <div class="header">
-    <div class="double-grid center"><h1>{{name}}</h1><button mat-flat-button color="primary" [disabled]="addTask.viewState !== addTask.viewStates.ALTERNATE" (click)="addTask.setCreateView()">Create a new Task</button></div>
+    <div class="double-grid center">
+      <h1>{{name}}</h1>
+      <button mat-flat-button color="primary"
+              [disabled]="addTask.viewState !== addTask.viewStates.ALTERNATE"
+              (click)="addTask.setCreateView()">Create a new Task
+      </button>
+    </div>
     <app-add-task #addTask (newItemEvent)="loadValues()" class="full-grid"></app-add-task>
   </div>
   <div id="board-wrapper">
-    <div class="board">
-      <div class="board-wrapper">
-        <div class="board-columns">
-          <div cdkDropList cdkDropListOrientation="horizontal" class="board-columns" (cdkDropListDropped)="dropGrid($event)">
-            <div cdkDragLockAxis="x" class="board-column" *ngFor="let column of board.columns" cdkDrag>
-              <div class="column-title" cdkDragHandle>
-                {{ column.name }}
-              </div>
-              <div class="tasks-container" id="{{column.id}}"
-                   [cdkDropListConnectedTo]="['0', '1', '2']"
-                   cdkDropList
-                   [cdkDropListData]="column.tasks"
-                   (cdkDropListDropped)="drop($event)">
-                <div class="task" *ngFor="let item of column.tasks"
-                     cdkDrag
-                     [cdkDragData]="item"
-                     (click)="addTask.setTaskOperation(item)"
-                >
-                  <p>{{item.value}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="board-column" *ngFor="let column of board.columns">
+      <mat-card-title class="column-title">
+        {{ column.name }}
+      </mat-card-title>
+      <div class="tasks-container" id="{{column.id}}"
+           [cdkDropListConnectedTo]="['0', '1', '2']"
+           cdkDropList
+           [cdkDropListData]="column.tasks"
+           (cdkDropListDropped)="drop($event)">
+        <mat-card class="task" *ngFor="let task of column.tasks"
+                  cdkDrag
+                  [cdkDragData]="task"
+                  (click)="addTask.setTaskOperation(task)">
+          <p>{{task.value}}</p>
+        </mat-card>
       </div>
     </div>
   </div>

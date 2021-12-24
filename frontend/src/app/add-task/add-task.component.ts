@@ -60,6 +60,7 @@ export class AddTaskComponent implements OnInit {
     } else {
       console.log("invalid data entry", {value, column})
     }
+    this.setCreateView()
   }
 
   delete(){
