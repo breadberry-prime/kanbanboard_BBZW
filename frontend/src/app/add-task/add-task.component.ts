@@ -1,7 +1,7 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BackendService} from "../services/backend.service";
 import {FormControl, FormGroup} from '@angular/forms';
-import {VIEW_STATUS, Task} from "../interfaces/Boards.interface";
+import {Task, VIEW_STATUS} from "../interfaces/Boards.interface";
 
 
 @Component({
@@ -66,6 +66,7 @@ export class AddTaskComponent implements OnInit {
     this.backendService.deleteTask(this.activeTask).subscribe(r => {
       this.newItemEvent.emit(true)
     })
+    this.setCreateView()
   }
 
   setTaskOperation(task: Task){
@@ -73,6 +74,11 @@ export class AddTaskComponent implements OnInit {
     this.viewState = VIEW_STATUS.ALTERNATE
     this.activeTask = task
     console.log(task)
+  }
+
+  setCreateView(){
+    this.viewState = VIEW_STATUS.CREATE;
+    this.createTaskForm.reset()
   }
 
   updateTable(){

@@ -1,6 +1,6 @@
 <div id="center-div">
   <div class="header">
-    <div class="double-grid center"><h1>{{name}}</h1></div>
+    <div class="double-grid center"><h1>{{name}}</h1><button mat-flat-button color="primary" [disabled]="addTask.viewState !== addTask.viewStates.ALTERNATE" (click)="addTask.setCreateView()">Create a new Task</button></div>
     <app-add-task #addTask (newItemEvent)="loadValues()" class="full-grid"></app-add-task>
   </div>
   <div id="board-wrapper">
